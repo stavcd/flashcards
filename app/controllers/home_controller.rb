@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   end
 
   def show
-   @card = Card.all
+    @card = Card.all
   end
 end
