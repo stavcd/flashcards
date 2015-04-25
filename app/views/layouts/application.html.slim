@@ -9,4 +9,15 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
 
   body
+    section.container
+      div.col-md-4
+        h2
+          strong Флешкарточкер
+      div.col-md-4
+        ul.navigation-links
+          li
+            =link_to 'Все карточки', cards_path
+          li
+            =link_to 'Добавить карточку', new_card_path
+
     = yield

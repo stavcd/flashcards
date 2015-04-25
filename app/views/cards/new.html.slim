@@ -1,0 +1,10 @@
+div.container.create-new-card
+  = simple_form_for @card do |f|
+    p
+      p = f.input_field :original_text, class: 'form-control'
+      p = f.input_field :translated_text, class: 'form-control'
+      p = f.datetime_select :review_date
+      p = f.button :submit, class: 'btn-primary'
+
+div.notice
+  = notice

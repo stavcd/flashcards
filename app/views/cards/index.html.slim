@@ -1,8 +1,11 @@
-h2 Список всех карточек
+div.container
+  strong Список всех карточек
 -@card.each do |card|
   div.container
     div.col-md-3.all-cards
       p= card.original_text
       p= card.translated_text
-      p= card.review_date.strftime("%d:%m:%Y")
+      p= card.review_date
+      p= link_to 'Редактировать', edit_card_path(card.id), data: {card_id: card.id}
+      p= link_to 'Удалить', [card], method: :delete, data: {card_id: card.id}
       hr
