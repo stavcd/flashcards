@@ -28,7 +28,6 @@ class CardsController < ApplicationController
       redirect_to cards_path
     else
       redirect_to edit_card_path(@card.id)
-
     end
 
   end
