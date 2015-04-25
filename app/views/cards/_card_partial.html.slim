@@ -1,0 +1,5 @@
+= simple_form_for(@card) do |f|
+  p = f.input_field :original_text, class: 'form-control'
+  p = f.input_field :translated_text, class: 'form-control'
+  p = f.date_select :review_date
+  p = f.button :submit, class: 'btn-success'

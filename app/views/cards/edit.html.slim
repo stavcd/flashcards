@@ -1,9 +1,5 @@
 div.container.card-edit-form
   h2 Редактирование  карточки
   p
-    = simple_form_for(@card) do |f|
-     p = f.input_field :original_text, class: 'form-control'
-     p = f.input_field :translated_text, class: 'form-control'
-     p = f.date_select :review_date
-     p = f.button :submit, class: 'btn-success'
+    = render 'card_partial'
 
