@@ -3,7 +3,7 @@ require 'nokogiri'
 
 Card.delete_all
 
-url = "https://quizlet.com/45155485/flash-cards"
+url = "https://quizlet.com/44820493/flash-cards/"
 
 doc = Nokogiri::HTML(open(url), nil, 'utf-8')
 doc.css('div.text').each do |word|
