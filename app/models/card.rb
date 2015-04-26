@@ -1,5 +1,5 @@
 class Card < ActiveRecord::Base
-  validates :original_text, :translated_text, :review_date, presence: true
+  validates :original_text, :translated_text, presence: true
   validate :text_a_not_equal
   before_create :set_default_review_date
 
