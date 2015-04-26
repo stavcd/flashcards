@@ -1,0 +1,11 @@
+div.container.create-new-card
+  p
+    = render 'form', card: @card
+
+div.container.field_with_errors
+  ul
+    - @card.errors.full_messages.each do |error|
+      li = error
+
+div.notice
+  = notice
