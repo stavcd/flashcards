@@ -17,8 +17,8 @@ class CardsController < ApplicationController
       flash[:notice] = 'Новая карта создана'
       redirect_to new_card_path
     else
-      render :new
       flash[:notice] = 'Ошибка в создании карты'
+      render :new
     end
 
   end
