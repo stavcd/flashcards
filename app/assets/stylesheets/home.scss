@@ -17,3 +17,16 @@
   color: red;
   display: table;
 }
+
+div.random_card_for_check {
+  margin-top: 50px;
+  padding-bottom: 20px;
+  background-color: #777777;
+  border: 2px dashed black;
+  border-radius: 10px;
+  p.word {
+    font-size: 20px;
+    color: #ffffff;
+  }
+}
+

@@ -1,0 +1,12 @@
+section.container
+  div.col-md-5.random_card_for_check
+    h3 КАРТОЧКА ДЛЯ ПРОВЕРКИ
+    h4 Оригинальное название
+    p.word = @card.original_text
+    h4 Введите перевод слова
+    = form_tag home_checking_card_path do
+      = hidden_field_tag :id, @card.id
+      p = text_field_tag  :input_text,nil,class: 'form-control'
+      = button_tag  'Проверить', class: 'btn btn-default'
+      hr
+      p.alert-success = notice
