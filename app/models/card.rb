@@ -18,4 +18,5 @@ class Card < ActiveRecord::Base
     self.review_date = self.review_date + 3.day
   end
 
+  scope :reviewing_card, -> {Card.order('random()').where('review_date<=?',DateTime.now).first()}
 end
