@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :cards
-  post 'home/checking_card', to: 'home#checking_card'
+  post 'review/review_card', to: 'review#review_card'
   root to: "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
