@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    Card.for_review.each do |card|
-      @card=card
-    end
+    @card = Card.for_review.first
   end
 
 end

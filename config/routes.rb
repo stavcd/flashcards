@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :cards
-  resources :review, only: [:create]
+  resources :reviews, only: [:create]
   root to: "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

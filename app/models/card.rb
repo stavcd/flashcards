@@ -8,8 +8,8 @@ class Card < ActiveRecord::Base
     self.review_date = self.review_date + 3.day
   end
 
-  def check_translation?(translated_text, input_text)
-    if prepare_text(translated_text) == prepare_text(input_text)
+  def check_translation?(input_text)
+    if prepare_text(self.translated_text) == prepare_text(input_text)
       self.update_attributes(review_date: DateTime.now+3.day)
     end
   end

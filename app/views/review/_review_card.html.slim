@@ -1,6 +1,6 @@
 section.container
   div.col-md-5.random_card_for_check
-    = form_tag review_index_path do
+    = form_tag reviews_path do
       h4 = @card.original_text
       = hidden_field_tag :card_id, @card.id
       = text_field_tag :input_text, nil, class: 'form-control'
