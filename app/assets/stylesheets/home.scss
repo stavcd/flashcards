@@ -7,9 +7,10 @@
   margin-top: 30px;
 }
 
-.navigation-links {
+ul.navigation-links {
   font-size: 22px;
   list-style: none;
+  display: flex;
 }
 
 .field_with_errors {
@@ -24,13 +25,5 @@ div.random_card_for_check {
   background-color: #f0ad4e;
   border: 3px solid #398439;
   border-radius: 10px;
-  p.word {
-    font-size: 20px;
-    font-style: italic;
-    color: #ffffff;
-  }
 }
 
-ul.navigation-links {
-  display: flex;
-}

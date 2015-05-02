@@ -2,14 +2,16 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, :review_date, presence: true
   validate :text_are_not_equal
   before_create :set_default_review_date
-  scope :random_cards_to_check, -> { Card.order('random()').where('review_date<=?', DateTime.now).first() }
+  scope :for_review, -> { Card.order('random()').where('review_date <= ?', DateTime.now) }
 
   def set_default_review_date
     self.review_date = self.review_date + 3.day
   end
 
-  def checking_card_text_errors?(translated_text, input_text)
-    prepare_text(translated_text) == prepare_text(input_text) ? true : false
+  def check_translation?(translated_text, input_text)
+    if prepare_text(translated_text) == prepare_text(input_text)
+      self.update_attributes(review_date: DateTime.now+3.day)
+    end
   end
 
   protected
