@@ -6,7 +6,8 @@ section.container
     h4 Введите перевод слова
     = form_tag review_review_card_path do
       = hidden_field_tag :id, @card.id
-      p = text_field_tag :input_text, nil, class: 'form-control'
-      = button_tag 'Проверить', class: 'btn btn-default'
+      = hidden_field_tag :review_date, @card.review_date
+      = text_field_tag :input_text, nil, class: 'form-control'
+      br = button_tag 'Проверить', class: 'btn btn-default'
       hr
       p.alert-success = notice

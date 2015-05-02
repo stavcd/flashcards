@@ -1,7 +1,6 @@
 class CardsController < ApplicationController
   before_action :load_card, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @card = Card.all
   end
@@ -11,7 +10,6 @@ class CardsController < ApplicationController
   end
 
   def create
-
     @card = Card.new(cards_params)
     if @card.save
       flash[:notice] = 'Новая карта создана'
@@ -20,7 +18,6 @@ class CardsController < ApplicationController
       flash[:notice] = 'Ошибка в создании карты'
       render :new
     end
-
   end
 
   def update
@@ -29,15 +26,6 @@ class CardsController < ApplicationController
     else
       redirect_to edit_card_path(@card.id)
     end
-
-  end
-
-  def show
-
-  end
-
-  def edit
-
   end
 
   def destroy

@@ -5,7 +5,6 @@ class HomeController < ApplicationController
 
   end
 
-
   private
 
   def find_random_card

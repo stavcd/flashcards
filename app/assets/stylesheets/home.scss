@@ -21,12 +21,16 @@
 div.random_card_for_check {
   margin-top: 50px;
   padding-bottom: 20px;
-  background-color: #777777;
-  border: 2px dashed black;
+  background-color: #f0ad4e;
+  border: 3px solid #398439;
   border-radius: 10px;
   p.word {
     font-size: 20px;
+    font-style: italic;
     color: #ffffff;
   }
 }
 
+ul.navigation-links {
+  display: flex;
+}
