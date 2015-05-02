@@ -2,7 +2,7 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, :review_date, presence: true
   validate :text_are_not_equal
   before_create :set_default_review_date
-  scope :for_review, -> { Card.order('random()').where('review_date <= ?', DateTime.now) }
+  scope :for_review, -> { where('review_date <= ?', DateTime.now).order('random()') }
 
   def set_default_review_date
     self.review_date = self.review_date + 3.day
