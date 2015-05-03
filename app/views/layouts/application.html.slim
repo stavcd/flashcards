@@ -9,14 +9,15 @@ html
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1"
 
-
   body
     section.container
-      div.col-md-4
+      div.col-md-3
         h2
           strong Флешкарточкер
-      div.col-md-4
-        ul.navigation-links
+      div.col-md-9
+        ul.navigation-links.nav
+          li
+            =link_to 'Главная', root_path
           li
             =link_to 'Все карточки', cards_path
           li
