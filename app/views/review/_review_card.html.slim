@@ -1,7 +1,7 @@
 section.container
   div.col-md-5.random_card_for_check
     = form_tag reviews_path do
-      h4 = @card.original_text
+      = label_tag 'original_text', @card.original_text, class: 'label-title'
       = hidden_field_tag :card_id, @card.id
       = text_field_tag :input_text, nil, class: 'form-control'
       br = button_tag 'Проверить', class: 'btn btn-default'
