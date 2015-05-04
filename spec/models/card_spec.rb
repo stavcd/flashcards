@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Card, type: :model do
+RSpec.describe Card do
 
   let(:card) { create(:card) }
   describe 'card has valid attributes' do
