@@ -5,8 +5,9 @@ feature 'Create Card', %q{'It should
 
   given(:card) { create(:card) }
 
+  before { visit new_card_path }
+
   scenario 'create card with valid attributes' do
-    visit new_card_path
     fill_in 'card_original_text', with: card.original_text
     fill_in 'card_translated_text', with: card.translated_text
     click_on 'Create Card'
@@ -14,7 +15,6 @@ feature 'Create Card', %q{'It should
   end
 
   scenario 'create card with invalid attributes' do
-    visit new_card_path
     fill_in 'card_original_text', with: ' '
     fill_in 'card_translated_text', with: card.translated_text
     click_on 'Create Card'
@@ -22,7 +22,6 @@ feature 'Create Card', %q{'It should
   end
 
   scenario 'create card with equal text' do
-    visit new_card_path
     fill_in 'card_original_text', with: 'hello'
     fill_in 'card_translated_text', with: ' HelLo '
     click_on 'Create Card'

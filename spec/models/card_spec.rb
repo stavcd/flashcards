@@ -21,7 +21,7 @@ RSpec.describe Card, type: :model do
   context 'card has different texts' do
 
     card = Card.new(original_text: 'hello', translated_text: ' HelLo ',
-                   review_date: DateTime.current)
+                    review_date: DateTime.current)
 
     it 'validates text_are_not_equal' do
       expect(card).to_not be_valid
@@ -32,7 +32,7 @@ RSpec.describe Card, type: :model do
 
     before { card.check_translation('привет') }
 
-    it ' check changes review date' do
+    it 'check changes review date' do
       expect(card.review_date).to eq((DateTime.current+3.days).to_date)
     end
   end
