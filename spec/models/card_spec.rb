@@ -21,7 +21,7 @@ RSpec.describe Card, type: :model do
   describe 'card has different texts' do
 
     card = Card.create(original_text: 'hello', translated_text: ' HelLo ',
-                    review_date: DateTime.current)
+                       review_date: DateTime.current)
 
     it 'validates text_are_not_equal' do
       expect(card).to_not be_valid

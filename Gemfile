@@ -39,12 +39,6 @@ gem 'simple_form'
 
 group :development, :test do
 
-  gem 'rspec-rails'
-
-  gem 'factory_girl_rails'
-
-  gem 'timecop'
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -56,6 +50,12 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec-rails'
+
+  gem 'factory_girl_rails'
+
+  gem 'timecop'
+
   gem 'shoulda-matchers'
 
   gem 'capybara'
