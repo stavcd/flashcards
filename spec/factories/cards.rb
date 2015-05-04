@@ -4,5 +4,4 @@ FactoryGirl.define do
     translated_text 'привет'
     review_date  (DateTime.current.to_date)
   end
-
 end
