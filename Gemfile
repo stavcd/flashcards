@@ -38,6 +38,7 @@ gem 'simple_form'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -46,5 +47,21 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'rspec-rails'
+
+  gem 'factory_girl_rails'
+
+  gem 'timecop'
+
+  gem 'shoulda-matchers'
+
+  gem 'capybara'
+
+  gem 'launchy'
+
+  gem 'database_cleaner'
 end
 
