@@ -7,8 +7,8 @@ gemfile: Gemfile
 env:
   - DB=postgresql
 before_script:
-  - cp config/database.yml.travis config/database.yml
   - psql -c 'create database flashcards_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
 script:
   - bundle exec rake db:setup
   - bundle exec rake db:test:prepare
