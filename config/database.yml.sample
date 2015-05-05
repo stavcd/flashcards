@@ -1,0 +1,9 @@
+
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: flashcards_test
+  pool: 5
+
+
