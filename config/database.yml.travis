@@ -1,11 +1,7 @@
 
 
-default: &default
+test:
+  database: flashcards_test
   adapter: postgresql
   encoding: utf8
   pool: 5
-
-
-test:
-  <<: *default
-  database: flashcards_test
