@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Card do
 
+  it { should belong_to :user }
+
   let(:card) { create(:card) }
+
   describe 'card has valid attributes' do
 
     it 'validates review date' do
