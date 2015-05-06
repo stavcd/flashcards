@@ -1,11 +1,10 @@
-
-    - if @card.present?
-      p= form_tag reviews_path  do
-        = label_tag 'original_text', @card.original_text, class: 'label-title'
-        = hidden_field_tag :card_id, @card.id
-        = text_field_tag :input_text, nil, class: 'form-control'
-        br = button_tag 'Проверить', class: 'btn btn-default'
-    - else
-      p.alert-danger  'Больше нет карточек для проверки!'
-    hr
-    p.alert-success = notice
+- if @card.present?
+  p= form_tag reviews_path do
+    = label_tag 'original_text', @card.original_text, class: 'label-title'
+    = hidden_field_tag :card_id, @card.id
+    = text_field_tag :input_text, nil, class: 'form-control'
+    br = button_tag 'Проверить', class: 'btn btn-default'
+- else
+  p.alert-danger  'Больше нет карточек для проверки!'
+  hr
+p.alert-success = notice
