@@ -1,9 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe Card do
+describe Card do
+
+  it { should belong_to :user }
 
   let(:card) { create(:card) }
+
   describe 'card has valid attributes' do
+
+    before { card.user = create(:user) }
+    it 'validates card has  user' do
+      expect(card.user.email).to eq 'MyString'
+    end
 
     it 'validates review date' do
       expect(card.review_date).to eq((DateTime.current + 3.days).to_date)
