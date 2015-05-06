@@ -2,7 +2,7 @@ div.container
   strong Список всех карточек
 -@card.each do |card|
   div.container
-    div.col-md-3.all-cards
+    div.col-md-3.card
       p= card.original_text
       p= card.translated_text
       p= card.review_date.strftime("%d:%m:%Y")
