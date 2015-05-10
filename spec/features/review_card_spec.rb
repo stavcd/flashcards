@@ -2,9 +2,10 @@ require 'rails_helper'
 
 feature 'Review Card', 'It should be the ability to check the knowledge Card' do
 
+  given(:user) { create(:user) }
   before do
-    Card.create(original_text: 'hello', translated_text: 'Привет', review_date: '01.05.2015')
-    visit root_path
+    user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: '01.05.2015')
+
   end
 
   scenario 'enter the correct translation' do

@@ -1,0 +1,11 @@
+div.container
+  = form_tag sessions_path, class: 'form-horizontal', method: :post
+    fieldset
+      div.form-group
+        div.col-lg-2
+          label.control-label Email
+          = text_field_tag :email, "", class: 'form-control'
+          label.control-label Password
+          = text_field_tag :password, "", class: 'form-control'
+        div.col-lg-12
+          = submit_tag :login, class: 'btn btn-default'
