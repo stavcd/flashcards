@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
     if @user = login(params[:email], params[:password])
       redirect_back_or_to root_path
     else
-      render 'new'
       flash[:notice] = 'Введите правильные данные'
+      render 'new'
     end
   end
 

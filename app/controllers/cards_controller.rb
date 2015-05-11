@@ -11,7 +11,6 @@ class CardsController < ApplicationController
 
   def create
     @card = current_user.cards.new(card_params)
-    puts @card.user
     if @card.save
       flash[:notice] = 'Новая карта создана'
       redirect_to new_card_path

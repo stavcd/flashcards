@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :require_login, except: [:not_authenticated]
+
   def not_authenticated
     redirect_to login_path, alert: "First login to access this page."
   end

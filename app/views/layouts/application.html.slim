@@ -22,6 +22,10 @@ html
             = link_to 'Register', new_user_path
           li
             = link_to 'Login', :login
+          li
+            = link_to 'Login with facebook', auth_at_provider_path(provider: :facebook)
+          li
+            = link_to 'Login with twitter', auth_at_provider_path(provider: :twitter)
 
     section.container
       div.col-md-3
@@ -37,6 +41,6 @@ html
             =link_to 'Добавить карточку', new_card_path
 
     div.notice
-        = notice
+      = notice
 
     = yield

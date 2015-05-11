@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
-
   root to: 'home#index'
+
+  post 'oauth/callback', to: 'oauths#callback'
+
+  get 'oauth/callback', to: 'oauths#callback'
+
+  get 'oauth/provider', to: 'oauths#oauth', as: :auth_at_provider
+
+
 
   resources :cards
 
@@ -14,6 +21,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
 
   post 'logout', to: 'sessions#destroy'
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
