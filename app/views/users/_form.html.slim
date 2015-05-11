@@ -11,3 +11,5 @@ div.log-in.container
         = f.password_field :password_confirmation, class: 'form-control'
       .col-lg-12
         = f.submit 'Регистрация'
+    - @user.errors.full_messages.each do |error|
+      li = error

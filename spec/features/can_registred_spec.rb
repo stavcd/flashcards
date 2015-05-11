@@ -14,7 +14,6 @@ feature 'User can register', %q{
     fill_in 'user[password_confirmation]', with: 12345
     click_on 'Регистрация'
 
-
     expect(page).to have_content 'User was successfully created'
     expect(current_path).to eq root_path
   end
