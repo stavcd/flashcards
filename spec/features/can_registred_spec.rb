@@ -18,5 +18,16 @@ feature 'User can register', %q{
     expect(current_path).to eq root_path
   end
 
+  given(:user) { create(:user) }
+  scenario 'the user has entered a an already existing email' do
+    visit root_path
+    click_on 'Register'
+    fill_in 'user[email]', with: user.email
+    fill_in 'user[password]', with: 12345
+    fill_in 'user[password_confirmation]', with: 12345
+    click_on 'Регистрация'
+
+    expect(page).to have_content 'Email has already been taken'
+  end
 
 end
