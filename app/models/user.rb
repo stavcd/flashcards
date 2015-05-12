@@ -8,5 +8,5 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, length: {minimum: 3}, on: [:create, :update], allow_nil: true
   validates :password_confirmation, presence: true, on: [:create, :update], allow_nil: true
   validates :email, :password, presence: true
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
 end
