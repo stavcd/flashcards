@@ -4,7 +4,7 @@ describe Card do
 
   it { should belong_to :user }
 
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
   before do
     @card = user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: DateTime.current.to_date)

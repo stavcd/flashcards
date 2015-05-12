@@ -12,4 +12,11 @@ module AcceptanceHelper
     visit new_card_path
   end
 
+  def given_card_for_update
+    sign_in(user)
+    visit cards_path
+  end
+
+
+
 end
