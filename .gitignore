@@ -18,3 +18,4 @@ config/database.yml
 .idea/modules.xml
 .idea/runConfigurations
 .idea
+config/secrets.yml
