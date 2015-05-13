@@ -2,12 +2,14 @@ class OauthsController < ApplicationController
   skip_before_action :require_login
 
   def oauth
+    session[:return_to_url] = request.referer unless request.referer =~ /oauth/
     login_at(params[:provider])
   end
 
   def callback
     provider = params[:provider]
     if @user = login_from(provider)
+      flash[:notice] = "Успешный вход через #{provider.titleize }"
       redirect_to root_path
     else
       begin

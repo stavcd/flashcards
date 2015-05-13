@@ -33,5 +33,4 @@ feature 'Create Card', %q{' It should
     click_on 'Create Card'
     expect(page).to have_content 'Оригинальный текст не должен быть равен тексту перевода'
   end
-
 end

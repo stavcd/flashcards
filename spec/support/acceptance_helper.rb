@@ -16,7 +16,4 @@ module AcceptanceHelper
     sign_in(user)
     visit cards_path
   end
-
-
-
 end
