@@ -15,7 +15,7 @@ feature 'User can update profile' do
     expect(page).to have_content 'Update user successfully'
   end
 
-  scenario 'authenticated user can update profile with invalid attributes' do
+  scenario 'authenticated user updates profile with invalid attributes' do
     sign_in(user)
     visit root_path
     click_on 'Редактировать профиль'
@@ -26,7 +26,7 @@ feature 'User can update profile' do
     expect(page).to have_content "Password confirmation doesn't match Password"
   end
 
-  scenario 'authenticated user can update profile with short password' do
+  scenario 'authenticated user updates profile with short password' do
     sign_in(user)
     visit root_path
     click_on 'Редактировать профиль'
