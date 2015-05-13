@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 
   get 'oauth/provider', to: 'oauths#oauth', as: :auth_at_provider
 
-
-
   resources :cards
 
   resources :reviews, only: [:create]
@@ -18,11 +16,15 @@ Rails.application.routes.draw do
 
   resources :users
 
+  #resources :profile
+
+  get 'profile', to: 'profile#edit'
+
+  post 'profile', to: 'profile#update'
+
   get 'login', to: 'sessions#new'
 
   post 'logout', to: 'sessions#destroy'
-
-
 
 
   # The priority is based upon order of creation: first created -> highest priority.

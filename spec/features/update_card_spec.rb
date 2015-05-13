@@ -6,7 +6,7 @@ feature 'Update Card', %q{There should
   given(:user) { create(:user, password: '12345') }
   given!(:card) { user.cards.create(original_text: 'Hello', translated_text: 'Привет', review_date: DateTime.current) }
 
-  scenario 'update card with valid attributes' do
+  scenario 'show card with valid attributes' do
     given_card_for_update
     click_on 'Редактировать'
     fill_in 'card[original_text]', with: 'text'
@@ -15,7 +15,7 @@ feature 'Update Card', %q{There should
     expect(current_path).to eq cards_path
   end
 
-  scenario 'update card with invalid attributes' do
+  scenario 'show card with invalid attributes' do
     given_card_for_update
     click_on 'Редактировать'
     fill_in 'card[original_text]', with: 'text'

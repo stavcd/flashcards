@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'User can update profile' do
+feature 'User can show profile' do
 
   given(:user) { create(:user, password: '12345') }
 
-  scenario 'authenticated user can update profile with valid attributes' do
+  scenario 'authenticated user can show profile with valid attributes' do
     sign_in(user)
     visit root_path
     click_on 'Редактировать профиль'
