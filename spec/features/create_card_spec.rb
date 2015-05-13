@@ -19,7 +19,6 @@ feature 'Create Card', %q{' It should
     sign_in(user)
     successful_entry_for_card_creating
     fill_in 'card[original_text]', with: ' '
-    puts card.inspect
     fill_in 'card[translated_text]', with: card.translated_text
     click_on 'Create Card'
     expect(page).to have_content "Original text can't be blank"

@@ -16,6 +16,8 @@ html
         ul.navigation-links.nav
           li
             = link_to 'Logout', :logout, method: :post
+          li
+            = link_to 'Редактировать профиль', user_path(current_user.id)
       - else
         ul.navigation-links.nav
           li
