@@ -18,4 +18,6 @@ config/database.yml
 .idea/modules.xml
 .idea/runConfigurations
 .idea
-config/secrets.yml
+
+# Ignore application configuration
+/config/application.yml
