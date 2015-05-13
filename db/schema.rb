@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20150511170121) do
   add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email",            null: false
     t.string   "crypted_password"
     t.string   "salt"
