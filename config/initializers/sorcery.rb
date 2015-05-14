@@ -109,18 +109,18 @@ Rails.application.config.sorcery.configure do |config|
   # Twitter will not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
   #
-   config.twitter.key = Rails.application.secrets.twitter_key
-   config.twitter.secret = Rails.application.secrets.twitter_secrets_key
-   config.twitter.callback_url = "http://127.0.0.1:3000/oauth/callback?provider=twitter"
-   config.twitter.user_info_mapping = {:email => "screen_name"}
+  config.twitter.key = Rails.application.secrets.twitter_key
+  config.twitter.secret = Rails.application.secrets.twitter_secrets_key
+  config.twitter.callback_url = Rails.application.secrets.twitter_callback_url
+  config.twitter.user_info_mapping = {:email => "screen_name"}
 
-   config.facebook.key = Rails.application.secrets.facebook_key
-   config.facebook.secret = Rails.application.secrets.facebook_app_secret
-   config.facebook.callback_url = "http://localhost:3000/oauth/callback?provider=facebook"
-   config.facebook.user_info_mapping = {:email => "name"}
-   #config.facebook.access_permissions = ["email", "publish_actions"]
-   #config.facebook.display = "popup"
-   #config.facebook.api_version = "v2.2"
+  config.facebook.key = Rails.application.secrets.facebook_key
+  config.facebook.secret = Rails.application.secrets.facebook_app_secret
+  config.facebook.callback_url = Rails.application.secrets.facebook_callback_url
+  config.facebook.user_info_mapping = {:email => "name"}
+  #config.facebook.access_permissions = ["email", "publish_actions"]
+  #config.facebook.display = "popup"
+  #config.facebook.api_version = "v2.2"
   #
   # config.github.key = ""
   # config.github.secret = ""
@@ -176,7 +176,7 @@ Rails.application.config.sorcery.configure do |config|
     # specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
     #
-     user.username_attribute_names = [:email]
+    user.username_attribute_names = [:email]
 
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
@@ -434,7 +434,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-     user.authentications_class = Authentication
+    user.authentications_class = Authentication
 
 
     # User's identifier in authentications class.
