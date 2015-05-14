@@ -5,6 +5,8 @@ class Card < ActiveRecord::Base
   before_create :set_default_review_date
   scope :for_review, -> { where('review_date <= ?', DateTime.now).order('random()') }
 
+  mount_uploader :image , ImageUploader
+
   def set_default_review_date
     self.review_date = self.review_date + 3.day
   end

@@ -6,6 +6,7 @@ div.container
       p= card.original_text
       p= card.translated_text
       p= card.review_date.strftime("%d:%m:%Y")
+      p= image_tag card.image.normal
       p= link_to 'Редактировать', edit_card_path(card.id), data: {card_id: card.id}
       p= link_to 'Удалить', card, method: :delete, data: {card_id: card.id}
       hr
