@@ -1,0 +1,15 @@
+div.log-in.container
+  h4 Регистрация нового пользователя
+  = form_for user, url: users_path, method: :post, html: {class: 'form-horizontal'} do |f|
+    div.form-group
+      .col-lg-2
+        label.control-label Email
+        = f.text_field :email, class: 'form-control'
+        label.control-label Пароль
+        = f.password_field :password, class: 'form-control'
+        label.control-label Повтор пароля
+        = f.password_field :password_confirmation, class: 'form-control'
+      .col-lg-12
+        = f.submit 'Регистрация'
+    - @user.errors.full_messages.each do |error|
+      li = error

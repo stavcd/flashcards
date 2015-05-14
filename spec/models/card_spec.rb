@@ -4,25 +4,27 @@ describe Card do
 
   it { should belong_to :user }
 
-  let(:card) { create(:card) }
+  let!(:user) { create(:user) }
 
+  before do
+    @card = user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: DateTime.current.to_date)
+  end
   describe 'card has valid attributes' do
 
-    before { card.user = create(:user) }
-    it 'validates card has  user' do
-      expect(card.user.email).to eq 'MyString'
+    it 'validates card has  user_id' do
+      expect(@card.user.id).to eq user.id
     end
 
     it 'validates review date' do
-      expect(card.review_date).to eq((DateTime.current + 3.days).to_date)
+      expect(@card.review_date).to eq((DateTime.current + 3.days).to_date)
     end
 
     it 'validates original_text' do
-      expect(card.original_text).to eq('hello')
+      expect(@card.original_text).to eq('hello')
     end
 
     it 'validates translated text' do
-      expect(card.translated_text).to eq('привет')
+      expect(@card.translated_text).to eq('Привет')
     end
   end
 
@@ -38,10 +40,10 @@ describe Card do
 
   describe 'check translation' do
 
-    before { card.check_translation('привет') }
+    before { @card.check_translation('привет') }
 
     it 'check changes review date' do
-      expect(card.review_date).to eq((DateTime.current+3.days).to_date)
+      expect(@card.review_date).to eq((DateTime.current+3.days).to_date)
     end
   end
 
@@ -49,7 +51,7 @@ describe Card do
 
     before do
       3.times do
-        Card.create(original_text: 'hello', translated_text: 'Привет', review_date: '01.05.2015')
+        user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: '01.05.2015')
       end
     end
 
