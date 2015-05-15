@@ -15,9 +15,11 @@ config/database.yml
 .idea/workspace.xml
 .idea/vcs.xml
 .idea/misc.xml
-.idea/modules.xml
+.idea/modules.x
 .idea/runConfigurations
 .idea
 
 # Ignore application configuration
 /config/application.yml
+
+public/uploads
