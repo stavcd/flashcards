@@ -7,7 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  storage :fog
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -49,7 +49,20 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   version :normal do
+    process :crop!
     process resize_to_fill: [360, 360]
+  end
+
+  def crop!
+    return unless model.image_crop_data
+    manipulate! do |img|
+      img.crop!(
+          model.image_crop_data[:x],
+          model.image_crop_data[:y],
+          model.image_crop_data[:width],
+          model.image_crop_data[:height],
+      )
+    end
   end
 
 end

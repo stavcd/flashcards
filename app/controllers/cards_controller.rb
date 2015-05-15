@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :load_card, only: [:show, :edit, :update, :destroy]
+  before_action :load_card, only: [:show, :edit, :update, :destroy, :crop_image]
 
   def index
     @card = current_user.cards.all
@@ -31,6 +31,13 @@ class CardsController < ApplicationController
   def destroy
     @card.destroy
     redirect_to cards_path
+  end
+
+  def crop_image
+    if request.put?
+      @card.crop_image!(params[:card][:image_crop_data])
+      redirect_to cards_path
+    end
   end
 
   private
