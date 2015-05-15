@@ -19,7 +19,7 @@ class Card < ActiveRecord::Base
   end
 
   def crop_image!(c)
-    c.each { |x, z| c[x] = z.to_i }
+    c.each { |x, y| c[x] = y.to_i }
     @image_crop_data = c
     image.recreate_versions!
   end
