@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :load_card, only: [:show, :edit, :update, :destroy]
+  before_action :load_card, only: [:show, :edit, :update, :destroy, :crop_image]
 
   def index
     @card = current_user.cards.all
@@ -33,6 +33,13 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
+  def crop_image
+    if request.put?
+      @card.crop_image!(params[:card][:image_crop_data])
+      redirect_to cards_path
+    end
+  end
+
   private
 
   def load_card
@@ -40,6 +47,6 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image)
   end
 end
