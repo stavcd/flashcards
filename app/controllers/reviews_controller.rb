@@ -1,5 +1,9 @@
 class ReviewsController < ApplicationController
 
+  def index
+    @card = current_user.user_deck_card_review
+  end
+
   def create
     @card = Card.find(review_params[:card_id])
     if @card.check_translation(review_params[:input_text])

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'oauth/provider', to: 'oauths#oauth', as: :auth_at_provider
 
-  resources :reviews, only: [:create]
+  resources :reviews, only: [:index,:create]
 
   resources :sessions
 

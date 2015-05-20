@@ -27,7 +27,9 @@ class DecksController < ApplicationController
   end
 
   def set_current
-    if current_user.update(current_deck_id: @deck.id)
+
+    if current_user.update!(current_deck_id: @deck.id)
+      puts current_user.inspect
       redirect_to decks_path, notice: 'Установлена текущая колода'
     else
       redirect_to decks_path, notice: 'Произошла ошибка'
