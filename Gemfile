@@ -42,6 +42,10 @@ gem 'rmagick'
 gem 'fog'
 
 gem 'fog-aws'
+
+gem 'responders'
+
+gem 'kaminari'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

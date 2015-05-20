@@ -1,42 +1,37 @@
 class CardsController < ApplicationController
-  before_action :load_card, only: [:show, :edit, :update, :destroy, :crop_image]
+  before_action :load_card, only: [:edit, :update, :destroy, :crop_image]
+  before_action :load_deck
 
   def index
-    @card = current_user.cards.all
+    @cards = @deck.cards.all.page(params[:page]).per(4)
   end
 
   def new
-    @card = current_user.cards.new
+    respond_with(@card = @deck.cards.new)
   end
 
   def create
-    @card = current_user.cards.new(card_params)
-    if @card.save
-      flash[:notice] = 'Новая карта создана'
-      redirect_to new_card_path
-    else
-      flash[:notice] = 'Ошибка в создании карты'
-      render :new
+    respond_with(@card = @deck.cards.create(card_params.merge(user_id: current_user.id))) do |format|
+      format.html { redirect_to new_deck_card_path } if @card.save
     end
   end
 
   def update
     if @card.update(card_params)
-      redirect_to cards_path
+      redirect_to deck_cards_path
     else
-      redirect_to edit_card_path(@card.id)
+      redirect_to edit_deck_card_path(@deck, @card.id)
     end
   end
 
   def destroy
-    @card.destroy
-    redirect_to cards_path
+    respond_with(@card.destroy)
   end
 
   def crop_image
     if request.put?
       @card.crop_image!(params[:card][:image_crop_data])
-      redirect_to cards_path
+      redirect_to deck_cards_path
     end
   end
 
@@ -44,6 +39,10 @@ class CardsController < ApplicationController
 
   def load_card
     @card = current_user.cards.find(params[:id])
+  end
+
+  def load_deck
+    @deck = current_user.decks.find(params[:deck_id])
   end
 
   def card_params

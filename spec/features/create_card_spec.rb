@@ -12,7 +12,7 @@ feature 'Create Card', %q{' It should
     fill_in 'card[original_text]', with: 'Hello'
     fill_in 'card[translated_text]', with: 'Привет'
     click_on 'Create Card'
-    expect(page).to have_content 'Новая карта создана'
+    expect(page).to have_content 'Card was successfully created'
   end
 
   scenario 'create card with invalid attributes' do

@@ -10,39 +10,33 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
 
   body
-    section.container
-      nav.col-md-2
-      - if current_user
-        ul.navigation-links.nav
-          li
-            = link_to 'Logout', :logout, method: :post
-          li
-            = link_to 'Редактировать профиль', profile_path
-      - else
-        ul.navigation-links.nav
-          li
-            = link_to 'Register', new_user_path
-          li
-            = link_to 'Log in', :login
-          li
-            = link_to 'Login with facebook', auth_at_provider_path(provider: :facebook)
-          li
-            = link_to 'Login with twitter', auth_at_provider_path(provider: :twitter)
+    div.container
+      nav.main-nav
+        ul.navigation-links.navbar-default.nav
+          - if current_user
+            li
+              = link_to 'Главная', root_path
+            li
+              = link_to 'Все колоды', decks_path
+            li
+              = link_to 'Добавить колоду', new_deck_path
+            li
+              = link_to 'Редактировать профиль', profile_path
+            li
+              = link_to 'Logout', :logout, method: :post
+          - else
+            li
+              = link_to 'Register', new_user_path
+            li
+              = link_to 'Log in', :login
+            li
+              = link_to 'Login with facebook', auth_at_provider_path(provider: :facebook)
+            li
+              = link_to 'Login with twitter', auth_at_provider_path(provider: :twitter)
+      -unless current_user
+        p.description Первый в мире удобный менеджер флеш-карточек. Именно так.
 
-    section.container
-      div.col-md-3
-        h2
-          strong Флешкарточкер
-      div.col-md-9
-        ul.navigation-links.nav
-          li
-            =link_to 'Главная', root_path
-          li
-            =link_to 'Все карточки', cards_path
-          li
-            =link_to 'Добавить карточку', new_card_path
-
-    div.notice
+    div.container.notice
       = notice
 
     = yield

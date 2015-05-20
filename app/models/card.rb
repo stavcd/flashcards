@@ -1,5 +1,6 @@
 class Card < ActiveRecord::Base
   attr_reader :image_crop_data
+  belongs_to :deck
   belongs_to :user
   validates :original_text, :translated_text, :review_date, :user_id, presence: true, on: :create
   validate :text_are_not_equal

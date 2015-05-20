@@ -8,18 +8,21 @@ Rails.application.routes.draw do
 
   get 'oauth/provider', to: 'oauths#oauth', as: :auth_at_provider
 
-  resources :cards do
-    get 'crop_image', on: :member
-    put 'crop_image', on: :member
-  end
-
   resources :reviews, only: [:create]
 
   resources :sessions
 
   resources :users
 
-  #resources :profile
+  resources :decks do
+    member do
+      put 'set_current'
+    end
+    resources :cards do
+      get 'crop_image', on: :member
+      put 'crop_image', on: :member
+    end
+  end
 
   get 'profile', to: 'profile#edit'
 

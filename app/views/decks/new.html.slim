@@ -1,0 +1,7 @@
+div.container
+  = render 'form', deck: @deck
+div.container
+  div.row
+    ul.field_with_errors
+      - @deck.errors.full_messages.each do |error|
+        li = error

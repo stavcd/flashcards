@@ -1,5 +1,5 @@
 div.crop-image.container
-  = form_for @card, url: crop_image_card_path(@card), method: :put do |f|
+  = form_for [@deck,@card], url: crop_image_deck_card_path(@deck,@card), method: :put do |f|
     = image_tag @card.image, id: 'crop_image'
     = f.fields_for :image_crop_data do |c|
       = c.hidden_field :x

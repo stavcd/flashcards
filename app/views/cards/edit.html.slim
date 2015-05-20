@@ -1,4 +1,5 @@
-div.container.card-edit-form
-  h2 Редактирование  карточки
-  p
-    = render 'form', card: @card
+div.container
+  div.row.card-edit-form
+    h2 Редактирование  карточки
+    p
+      = render 'form', deck: @deck, card: @card

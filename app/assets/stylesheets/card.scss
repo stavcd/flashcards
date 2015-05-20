@@ -3,5 +3,15 @@
 }
 
 .create-new-card {
-  max-width: 400px;
+  max-width: 300px;
+}
+
+.field_with_errors {
+  padding: 2px;
+  color: red;
+  list-style: none;
+}
+
+.paginate-bottom {
+  margin-bottom: 20px;
 }

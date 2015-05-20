@@ -1,6 +1,14 @@
-= simple_form_for card do |f|
-  p = f.input_field :original_text, class: 'form-control'
-  p = f.input_field :translated_text, class: 'form-control'
-  p = f.date_select :review_date
+= simple_form_for [deck,card] , html: {class: 'form-horizontal'} do |f|
+  div
+    p Оригинальный текст
+    p = f.input_field :original_text, class: 'form-control'
+  div
+    p Текст перевода
+    p = f.input_field :translated_text, class: 'form-control'
+  div
+    p Дата контроля
+    p = f.date_select :review_date
+  div
+    p Изображение
   p = f.file_field :image
   p = f.button :submit, class: 'btn-success'

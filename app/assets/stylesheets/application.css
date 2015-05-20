@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+.deck-control {
+    diisplay: inline-block;
+    margin: 0 10px;
+    font-size: 22px;
+}
+.deck-control a:hover {
+    color: red;
+}

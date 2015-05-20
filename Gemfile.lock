@@ -193,6 +193,9 @@ GEM
       turbolinks
     json (1.8.2)
     jwt (1.5.0)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     loofah (2.0.1)
@@ -247,6 +250,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     rmagick (2.15.0)
     rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
@@ -336,10 +341,12 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  kaminari
   launchy
   nokogiri
   pg
   rails (= 4.2.1)
+  responders
   rmagick
   rspec-rails
   sass-rails (~> 5.0)
