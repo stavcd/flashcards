@@ -7,7 +7,7 @@ class CardsController < ApplicationController
   end
 
   def new
-    respond_with(@card = @deck.cards.new)
+    @card = @deck.cards.new
   end
 
   def create
@@ -18,14 +18,16 @@ class CardsController < ApplicationController
 
   def update
     if @card.update(card_params)
-      redirect_to deck_cards_path
+      redirect_to deck_cards_path, notice: 'Карта успешно обновленна'
     else
       redirect_to edit_deck_card_path(@deck, @card.id)
     end
   end
 
   def destroy
-    respond_with(@card.destroy)
+    if @card.destroy
+      redirect_to deck_cards_path
+    end
   end
 
   def crop_image
