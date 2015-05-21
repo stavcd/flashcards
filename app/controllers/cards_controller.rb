@@ -3,7 +3,7 @@ class CardsController < ApplicationController
   before_action :load_deck
 
   def index
-    @cards = @deck.cards.all.page(params[:page]).per(4)
+    @cards = @deck.cards.all
   end
 
   def new
