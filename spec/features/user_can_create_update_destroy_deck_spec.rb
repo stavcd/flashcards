@@ -36,7 +36,7 @@ feature 'User can create, update, destroy deck' do
     expect(current_path).to eq decks_path
   end
 
-  scenario 'User can update deck name' do
+  scenario 'User can update deck with blank name' do
     given_decks
     click_on 'Редактировать'
     fill_in 'deck[name]', with: ''
