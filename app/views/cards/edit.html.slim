@@ -2,4 +2,10 @@ div.container
   div.row.card-edit-form
     h2 Редактирование  карточки
     p
-      = render 'form', deck: @deck, card: @card
+      = render 'form', card: @card
+
+div.container
+  div.row
+    ul.field_with_errors
+      - @card.errors.full_messages.each do |error|
+        li = error

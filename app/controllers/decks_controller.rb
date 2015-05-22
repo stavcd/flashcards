@@ -10,8 +10,11 @@ class DecksController < ApplicationController
   end
 
   def create
-    respond_with(@deck = current_user.decks.new(deck_params)) do |format|
-      format.html { redirect_to decks_path } if @deck.save
+    @deck = current_user.decks.new(deck_params)
+    if @deck.save
+      redirect_to decks_path, notice: 'Новая колода создана'
+    else
+      render 'new'
     end
   end
 
@@ -24,9 +27,7 @@ class DecksController < ApplicationController
   end
 
   def set_current
-
-    if current_user.update!(current_deck_id: @deck.id)
-      puts current_user.inspect
+    if current_user.update(current_deck_id: @deck.id)
       redirect_to decks_path, notice: 'Установлена текущая колода'
     else
       redirect_to decks_path, notice: 'Произошла ошибка'

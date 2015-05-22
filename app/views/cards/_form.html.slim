@@ -1,4 +1,4 @@
-= simple_form_for [deck,card] , html: {class: 'form-horizontal'} do |f|
+= simple_form_for card, html: {class: 'form-horizontal'} do |f|
   div
     p Оригинальный текст
     p = f.input_field :original_text, class: 'form-control'
@@ -8,6 +8,8 @@
   div
     p Дата контроля
     p = f.date_select :review_date
+    br
+  p = f.input :deck_id, collection: current_user.decks.all, label: 'Выбор колоды', include_blank: false
   div
     p Изображение
   p = f.file_field :image

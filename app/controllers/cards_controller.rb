@@ -1,39 +1,42 @@
 class CardsController < ApplicationController
   before_action :load_card, only: [:edit, :update, :destroy, :crop_image]
-  before_action :load_deck
+  before_action :load_deck, only: [:index]
 
   def index
     @cards = @deck.cards.all
   end
 
   def new
-    @card = @deck.cards.new
+    @card = current_user.cards.new
   end
 
   def create
-    respond_with(@card = @deck.cards.create(card_params.merge(user_id: current_user.id))) do |format|
-      format.html { redirect_to new_deck_card_path } if @card.save
+    @card = current_user.cards.new(card_params.merge(user_id: current_user.id))
+    if @card.save
+      redirect_to new_card_path, notice: 'Новая карта успешно создана'
+    else
+      render 'new'
     end
   end
 
   def update
     if @card.update(card_params)
-      redirect_to deck_cards_path, notice: 'Карта успешно обновленна'
+      redirect_to deck_cards_path(card_params[:deck_id]), notice: 'Карта успешно обновленна'
     else
-      redirect_to edit_deck_card_path(@deck, @card.id)
+      render 'cards/edit'
     end
   end
 
   def destroy
     if @card.destroy
-      redirect_to deck_cards_path
+      redirect_to deck_cards_path(@card.deck_id)
     end
   end
 
   def crop_image
     if request.put?
       @card.crop_image!(params[:card][:image_crop_data])
-      redirect_to deck_cards_path
+      redirect_to deck_cards_path(@card.deck_id)
     end
   end
 
@@ -48,6 +51,6 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :deck_id)
   end
 end

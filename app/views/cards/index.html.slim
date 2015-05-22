@@ -10,6 +10,7 @@ div.container
       p= card.translated_text
       p= card.review_date.strftime("%d:%m:%Y")
       p= image_tag card.image.normal
-      p= link_to 'Редактировать', edit_deck_card_path(@deck, card)
-      p= link_to 'Удалить', deck_card_path(@deck, card), method: :delete
-      p= link_to 'Обрезать рисунок', crop_image_deck_card_path(@deck,card.id)
+      p= link_to 'Редактировать', edit_card_path(card)
+      p= link_to 'Удалить',card_path(card.id), method: :delete
+      p= link_to 'Обрезать рисунок', crop_image_card_path(card.id)
+  br

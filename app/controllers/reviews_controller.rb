@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
   def index
-    @card = current_user.user_deck_card_review
+    @card = current_user.cards_for_review
   end
 
   def create

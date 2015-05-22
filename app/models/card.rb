@@ -2,7 +2,7 @@ class Card < ActiveRecord::Base
   attr_reader :image_crop_data
   belongs_to :deck
   belongs_to :user
-  validates :original_text, :translated_text, :review_date, :user_id, presence: true, on: :create
+  validates :original_text, :translated_text, :review_date, :user_id, presence: true, on: [:create,:update]
   validate :text_are_not_equal
   before_create :set_default_review_date
   scope :for_review, -> { where('review_date <= ?', DateTime.now).order('random()') }
@@ -37,5 +37,4 @@ class Card < ActiveRecord::Base
       errors.add(:translated_text, 'Текст перевода не должен быть равен оригинальному тексту')
     end
   end
-
 end

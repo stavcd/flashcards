@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, on: [:create, :update], allow_nil: true
   validates :email, presence: true, uniqueness: true, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/}
 
-  def user_deck_card_review
+  def cards_for_review
     if current_deck
-      current_deck.cards.for_review.first
+      current_deck.cards.for_review
     else
-      cards.for_review.first
+      cards.for_review
     end
   end
 end
