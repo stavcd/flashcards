@@ -7,7 +7,7 @@ div.container
         h3.alert-warning Текущая колода
       .panel-body
         -unless deck.current_deck?
-          span.deck-control= link_to 'Сделать текущей колодой',set_current_deck_path(deck.id), method: :put
-        span.deck-control= link_to 'Просмот карточек',deck_cards_path(deck.id)
-        span.deck-control= link_to 'Редактировать',edit_deck_path(deck.id)
-        span.deck-control= link_to 'Удалить',deck_path(deck.id),method: :delete
+          span.deck-control= link_to 'Сделать текущей колодой', set_current_deck_path(deck.id), method: :put
+        span.deck-control= link_to 'Просмот карточек', deck_cards_path(deck.id)
+        span.deck-control= link_to 'Редактировать', edit_deck_path(deck.id)
+        span.deck-control= link_to 'Удалить', deck_path(deck.id), method: :delete

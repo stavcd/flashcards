@@ -11,7 +11,7 @@ feature 'User can create, update, destroy deck' do
     fill_in 'deck[name]', with: 'test'
     click_on 'Create Deck'
     expect(current_path).to eq decks_path
-    expect(page).to have_content 'Deck was successfully created.'
+    expect(page).to have_content 'Новая колода создана'
   end
 
   scenario 'Create deck with blank name' do

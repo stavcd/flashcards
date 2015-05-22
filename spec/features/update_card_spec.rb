@@ -23,6 +23,6 @@ feature 'Update Card', %q{There should
     fill_in 'card[original_text]', with: 'text'
     fill_in 'card[translated_text]', with: 'text'
     click_on 'Update Card'
-    expect(current_path).to eq edit_deck_card_path(deck.id, card.id)
+    expect(current_path).to eq card_path(card)
   end
 end

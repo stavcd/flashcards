@@ -11,16 +11,16 @@ feature 'Create Card', %q{' It should
 
   scenario 'authenticated user create card with valid attributes' do
     sign_in(user)
-    visit new_deck_card_path(deck.id)
+    visit new_card_path(deck.id)
     fill_in 'card[original_text]', with: 'Hello'
     fill_in 'card[translated_text]', with: 'Привет'
     click_on 'Create Card'
-    expect(page).to have_content 'Card was successfully created'
+    expect(page).to have_content 'Новая карта успешно создана'
   end
 
   scenario 'create card with invalid attributes' do
     sign_in(user)
-    visit new_deck_card_path(deck.id)
+    visit new_card_path(deck.id)
     fill_in 'card[original_text]', with: ' '
     fill_in 'card[translated_text]', with: card.translated_text
     click_on 'Create Card'
@@ -29,7 +29,7 @@ feature 'Create Card', %q{' It should
 
   scenario 'create card with equal text' do
     sign_in(user)
-    visit new_deck_card_path(deck.id)
+    visit new_card_path(deck.id)
     fill_in 'card[original_text]', with: 'hello'
     fill_in 'card[translated_text]', with: ' HelLo '
     click_on 'Create Card'
