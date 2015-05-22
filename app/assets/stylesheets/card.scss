@@ -24,3 +24,13 @@ select.select {
   width: 200px;
   font-size: 20px;
 }
+
+.deck-control {
+  diisplay: inline-block;
+  margin: 0 10px;
+  font-size: 22px;
+}
+
+.deck-control a:hover {
+  color: red;
+}
