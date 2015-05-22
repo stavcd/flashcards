@@ -8,21 +8,37 @@
 }
 
 ul.navigation-links {
-  font-size: 22px;
   list-style: none;
   display: flex;
 }
 
-.field_with_errors {
-  padding: 2px;
+ul.navigation-links li {
+  font-size: 22px;
+  line-height: 22px;
+  flex-grow: 1;
+}
+
+div.notice {
+  font-size: 22px;
   color: red;
-  display: table;
+  margin-top: 10px;
+  padding: 10px;
 }
 
 div.card-for-review {
   margin-top: 50px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   background-color: #f0ad4e;
   border: 3px solid #398439;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.image {
+  border: 2px dotted black;
+  margin: 5px;
+  padding: 5px;
+}
+
+.login {
+  margin-top: 50px;
 }

@@ -1,8 +1,9 @@
-div.container.create-new-card
-  p
+div.container
+  .row.create-new-card
     = render 'form', card: @card
 
-div.container.field_with_errors
-  ul
-    - @card.errors.full_messages.each do |error|
-      li = error
+div.container
+  div.row
+    ul.field_with_errors
+      - @card.errors.full_messages.each do |error|
+        li = error

@@ -3,5 +3,34 @@
 }
 
 .create-new-card {
-  max-width: 400px;
+  max-width: 300px;
+}
+
+.field_with_errors {
+  padding: 2px;
+  color: red;
+  list-style: none;
+}
+
+.paginate-bottom {
+  margin-bottom: 20px;
+}
+
+.simple_form {
+  font-size: 18px;
+}
+
+select.select {
+  width: 200px;
+  font-size: 20px;
+}
+
+.deck-control {
+  diisplay: inline-block;
+  margin: 0 10px;
+  font-size: 22px;
+}
+
+.deck-control a:hover {
+  color: red;
 }

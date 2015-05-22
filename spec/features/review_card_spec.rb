@@ -19,4 +19,3 @@ feature 'Review Card', 'It should be the ability to check the knowledge Card' do
     expect(page).to have_content 'Неправильный перевод'
   end
 end
-
