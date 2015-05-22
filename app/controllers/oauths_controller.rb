@@ -2,7 +2,6 @@ class OauthsController < ApplicationController
   skip_before_action :require_login
 
   def oauth
-    session[:return_to_url] = request.referer unless request.referer =~ /oauth/
     login_at(oauth_params[:provider])
   end
 
@@ -12,7 +11,7 @@ class OauthsController < ApplicationController
       redirect_to root_path
     else
       begin
-        @user = create_from(provider)
+        @user = create_from(oauth_params[:provider])
         reset_session
         auto_login(@user)
         redirect_to root_path
