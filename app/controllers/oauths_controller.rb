@@ -6,12 +6,13 @@ class OauthsController < ApplicationController
   end
 
   def callback
-    if @user = login_from(oauth_params[:provider])
+    provider = oauth_params[:provider]
+    if @user = login_from(provider)
       flash[:notice] = "Успешный вход через #{oauth_params[:provider].titleize }"
       redirect_to root_path
     else
       begin
-        @user = create_from(oauth_params[:provider])
+        @user = create_and_validate_from(provider)
         reset_session
         auto_login(@user)
         redirect_to root_path
