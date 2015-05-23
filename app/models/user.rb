@@ -11,8 +11,7 @@ class User < ActiveRecord::Base
             on: [:create, :update], allow_nil: true
   validates :password_confirmation, presence: true, on: [:create, :update], allow_nil: true
   validates :email, presence: true, uniqueness: true
-  validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/},
-            on: [:create]
+  validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/}, on: [:create]
 
   def cards_for_review
     if current_deck
