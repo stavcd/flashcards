@@ -10,6 +10,7 @@ div.log-in.container.login
         label.control-label Повтор пароля
         = f.password_field :password_confirmation, class: 'form-control'
       .col-lg-12
-        = f.submit 'Регистрация'
+        br
+        = f.submit 'Регистрация', class: 'btn btn-default'
     - @user.errors.full_messages.each do |error|
       li = error
