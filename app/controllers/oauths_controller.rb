@@ -12,7 +12,7 @@ class OauthsController < ApplicationController
       redirect_to root_path
     else
       begin
-        @user = create_and_validate_from(provider)
+        @user = create_from(provider)
         reset_session
         auto_login(@user)
         redirect_to root_path

@@ -147,7 +147,7 @@ Rails.application.config.sorcery.configure do |config|
   # config.liveid.user_info_mapping = {:username => "name"}
 
   # For information about JIRA API:
-  # https://developer.atlassian.com/display/JIRADEV/JIRA+REST+API+Example+-+OAuth+authentication
+  # https://developer.atlassian.com/display/JIRADEV/JIRA+REST+API+Example+-OAuth+authentication
   # to obtain the consumer key and the public key you can use the jira-ruby gem https://github.com/sumoheavy/jira-ruby
   # or run openssl req -x509 -nodes -newkey rsa:1024 -sha1 -keyout rsakey.pem -out rsacert.pem to obtain the public key
   # Make sure you have configured the application link properly
