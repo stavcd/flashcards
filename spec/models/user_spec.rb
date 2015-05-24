@@ -18,4 +18,43 @@ describe User do
 
   it { should allow_value('user@example.com').for(:email) }
 
+  describe 'create user' do
+
+    it 'user create with  valid attributes' do
+      user = User.create(email: '111@222.com', password: '1111', password_confirmation: '1111')
+      expect(user).to be_valid
+    end
+
+    it 'user create with  invalid email' do
+      user = User.create(email: '111222.com', password: '1111', password_confirmation: '1111')
+      expect(user).to_not be_valid
+    end
+
+    it 'user create with  blank password' do
+      user = User.create(email: '111222.com', password: '', password_confirmation: '1111')
+      expect(user).to_not be_valid
+    end
+
+    it 'user create with  blank password_confirmation' do
+      user = User.create(email: '111222.com', password: '1111', password_confirmation: '')
+      expect(user).to_not be_valid
+    end
+  end
+
+  describe 'update user' do
+
+    before { @user = User.create(email: '111@222.com', password: '1111', password_confirmation: '1111') }
+
+    it 'user update with  valid attributes' do
+      user1 = @user.update(email: '211@222.com', password: '2111', password_confirmation: '2111')
+      expect(user1).to be true
+    end
+
+    it 'user update with  invalid attributes' do
+      user1 = @user.update(email: '211222.com', password: '2111', password_confirmation: '2111')
+      expect(user1).to be false
+    end
+
+
+  end
 end
