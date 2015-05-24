@@ -4,18 +4,23 @@ class Card < ActiveRecord::Base
   belongs_to :user
   validates :original_text, :translated_text, :review_date, :user_id, presence: true, on: [:create, :update]
   validate :text_are_not_equal
-  before_create :set_default_review_date
+  # before_create :set_default_review_date
   scope :for_review, -> { where('review_date <= ?', DateTime.now).order('random()') }
 
   mount_uploader :image, ImageUploader
 
-  def set_default_review_date
-    self.review_date = self.review_date + 3.day
-  end
-
   def check_translation(input_text)
-    if prepare_text(translated_text) == prepare_text(input_text)
-      self.update_attributes(review_date: (DateTime.current+3.day).to_date)
+    if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
+      self.accuracy = 0
+      date_for_review(self.attempt = 1)
+      true
+    elsif prepare_text(translated_text) == prepare_text(input_text)
+      date_for_review(self.attempt = + 1)
+      true
+    else
+      self.attempt += 1
+      self.accuracy -= 1
+      false
     end
   end
 
@@ -37,4 +42,23 @@ class Card < ActiveRecord::Base
       errors.add(:translated_text, 'Текст перевода не должен быть равен оригинальному тексту')
     end
   end
+end
+
+def date_for_review(attempt)
+  case attempt
+    when 1
+      self.update_attributes(review_date: (DateTime.current+12.hour))
+    when 2
+      self.update_attributes(review_date: (DateTime.current+3.day).to_date)
+    when 3
+      self.update_attributes(review_date: (DateTime.current+7.day).to_date)
+    when 4
+      self.update_attributes(review_date: (DateTime.current+14.day).to_date)
+    when 5
+      self.update_attributes(review_date: (DateTime.current+30.day).to_date)
+    else
+      self.attempt = 0
+      self.accuracy = 0
+  end
+
 end
