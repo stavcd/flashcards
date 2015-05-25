@@ -10,16 +10,18 @@ class Card < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def set_default_review_date
-      self.review_date = DateTime.now
+    self.review_date = DateTime.now
   end
 
   def check_translation(input_text)
-    if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
+    if prepare_text(translated_text) ==
+        prepare_text(input_text) && self.accuracy <= -3
       self.accuracy = 0
       self.attempt = 1
       date_for_review(self.attempt)
       true
-    elsif prepare_text(translated_text) == prepare_text(input_text) && self.accuracy > -3
+    elsif prepare_text(translated_text) ==
+        prepare_text(input_text) && self.accuracy > -3
       self.attempt += 1
       date_for_review(self.attempt)
       true
@@ -48,7 +50,6 @@ class Card < ActiveRecord::Base
       errors.add(:translated_text, 'Текст перевода не должен быть равен оригинальному тексту')
     end
   end
-
 
   def date_for_review(attempt)
     case attempt
