@@ -7,7 +7,8 @@ describe Card do
   let!(:user) { create(:user) }
 
   before do
-    @card = user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: DateTime.current.to_date)
+    @card = user.cards.create(original_text: 'hello', translated_text: 'Привет',
+                              review_date: DateTime.current.to_date)
   end
   describe 'card has valid attributes' do
 
@@ -40,9 +41,11 @@ describe Card do
       @card.check_translation('привет')
     end
     it 'check changes review date to 12 hours' do
-      expect(@card.review_date).to eq((DateTime.current+12.hour).to_s)
+      expect(@card.review_date).to eq((DateTime.current+12.hour).strftime('%H'))
     end
-
+    it 'caheck attempt value' do
+      expect(@card.attempt).to eq 1
+    end
   end
 
   describe 'check translation for second attempt' do
@@ -52,8 +55,27 @@ describe Card do
       @card.check_translation('привет')
     end
 
-    it 'check changes review date to 7 day' do
+    it 'check changes review date to 3 day' do
       expect(@card.review_date).to eq((DateTime.current+3.day).to_date)
+    end
+    it 'caheck attempt value' do
+      expect(@card.attempt).to eq 2
+    end
+  end
+
+  describe 'check translation for third attempt' do
+
+    before do
+      @card.attempt = 2
+      @card.check_translation('привет')
+    end
+
+    it 'check changes review date to 14 day' do
+      expect(@card.review_date).to eq((DateTime.current+7.day).to_date)
+    end
+
+    it 'caheck attempt value' do
+      expect(@card.attempt).to eq 3
     end
   end
 
@@ -67,6 +89,10 @@ describe Card do
     it 'check changes review date to 14 day' do
       expect(@card.review_date).to eq((DateTime.current+14.day).to_date)
     end
+
+    it 'caheck attempt value' do
+      expect(@card.attempt).to eq 4
+    end
   end
 
   describe 'check translation for five attempt' do
@@ -79,6 +105,10 @@ describe Card do
     it 'check changes review date to 30 day' do
       expect(@card.review_date).to eq((DateTime.current+30.day).to_date)
     end
+
+    it 'caheck attempt value' do
+      expect(@card.attempt).to eq 5
+    end
   end
 
   describe 'check translation for three bad attempt ' do
@@ -89,7 +119,7 @@ describe Card do
     end
 
     it 'check changes review date 12 hour ' do
-      expect(@card.review_date).to eq((DateTime.current+12.hour).to_s)
+      expect(@card.review_date).to eq((DateTime.current+12.hour).strftime('%H'))
     end
 
     it 'check accuracy value' do
@@ -103,7 +133,8 @@ describe Card do
     before do
       3.times do
         user.cards.create(original_text: 'hello', translated_text: 'Привет',
-                          review_date: DateTime.current)
+                    review_date: '01.05.2015')
+        puts user.inspect
       end
     end
 
@@ -111,5 +142,6 @@ describe Card do
       expect(Card.for_review.size).to eq 3
     end
   end
+
 end
 
