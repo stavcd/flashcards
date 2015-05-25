@@ -102,7 +102,8 @@ describe Card do
 
     before do
       3.times do
-        user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: DateTime.current, accuracy: 0, attempt: 0)
+        user.cards.create(original_text: 'hello', translated_text: 'Привет',
+                          review_date: DateTime.current)
       end
     end
 
