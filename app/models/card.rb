@@ -14,14 +14,12 @@ class Card < ActiveRecord::Base
   end
 
   def check_translation(input_text)
-    if prepare_text(translated_text) ==
-        prepare_text(input_text) && self.accuracy <= -3
+    if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
       self.accuracy = 0
       self.attempt = 1
       date_for_review(self.attempt)
       true
-    elsif prepare_text(translated_text) ==
-        prepare_text(input_text) && self.accuracy > -3
+    elsif prepare_text(translated_text) == prepare_text(input_text) && self.accuracy > -3
       self.attempt += 1
       date_for_review(self.attempt)
       true
@@ -52,25 +50,25 @@ class Card < ActiveRecord::Base
   end
 
   def date_for_review(attempt)
-    case attempt
-    when 1
-      update_review_date((DateTime.current+12.hour).strftime('%H'))
-    when 2
-      update_review_date((DateTime.current+3.day).to_date)
-    when 3
-      update_review_date((DateTime.current+7.day).to_date)
-    when 4
-      update_review_date((DateTime.current+14.day).to_date)
-    when 5
-      update_review_date((DateTime.current+30.day).to_date)
-    else
-      self.attempt = 0
-      self.accuracy = 0
+     case attempt
+     when 1
+       update_review_date(12.hour)
+     when 2
+       update_review_date(3.day)
+     when 3
+       update_review_date(7.day)
+     when 4
+       update_review_date(14.day)
+     when 5
+       update_review_date(30.day)
+     else
+       self.attempt = 0
+       self.accuracy = 0
     end
   end
 
   def update_review_date(date)
-    self.update_attributes(review_date: date)
+    self.update_attributes(review_date: (DateTime.current + date).strftime("%Y-%m-%d %H:%M:%S"))
   end
 
 end
