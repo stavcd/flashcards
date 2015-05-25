@@ -4,18 +4,19 @@ class Card < ActiveRecord::Base
   belongs_to :user
   validates :original_text, :translated_text, :review_date, :user_id, presence: true, on: [:create, :update]
   validate :text_are_not_equal
-  # before_create :set_default_review_date
-  scope :for_review, -> { where('review_date <= ?', DateTime.now).order('random()') }
+  scope :for_review, -> { where('review_date <= ?', DateTime.current).order('random()') }
 
   mount_uploader :image, ImageUploader
 
   def check_translation(input_text)
     if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
       self.accuracy = 0
-      date_for_review(self.attempt = 1)
+      self.attempt = 1
+      date_for_review(self.attempt)
       true
-    elsif prepare_text(translated_text) == prepare_text(input_text)
-      date_for_review(self.attempt = + 1)
+    elsif prepare_text(translated_text) == prepare_text(input_text) && self.accuracy > -3
+      self.attempt += 1
+      date_for_review(self.attempt)
       true
     else
       self.attempt += 1
@@ -47,7 +48,7 @@ end
 def date_for_review(attempt)
   case attempt
     when 1
-      self.update_attributes(review_date: (DateTime.current+12.hour))
+      self.update_attributes(review_date: (DateTime.current+12.hour).to_s)
     when 2
       self.update_attributes(review_date: (DateTime.current+3.day).to_date)
     when 3

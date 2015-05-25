@@ -15,10 +15,6 @@ describe Card do
       expect(@card.user.id).to eq user.id
     end
 
-    it 'validates review date' do
-      expect(@card.review_date).to eq((DateTime.current + 3.days).to_date)
-    end
-
     it 'validates original_text' do
       expect(@card.original_text).to eq('hello')
     end
@@ -38,20 +34,78 @@ describe Card do
     end
   end
 
-  describe 'check translation' do
+  describe 'check translation for first attempt' do
+    before do
+      @card.attempt = 0
+      @card.check_translation('привет')
+    end
+    it 'check changes review date to 12 hours' do
+      expect(@card.review_date).to eq((DateTime.current+12.hour).to_s)
+    end
 
-    before { @card.check_translation('привет') }
+  end
 
-    it 'check changes review date' do
-      expect(@card.review_date).to eq((DateTime.current+3.days).to_date)
+  describe 'check translation for second attempt' do
+
+    before do
+      @card.attempt = 1
+      @card.check_translation('привет')
+    end
+
+    it 'check changes review date to 7 day' do
+      expect(@card.review_date).to eq((DateTime.current+3.day).to_date)
     end
   end
+
+
+  describe 'check translation for four attempt' do
+
+    before do
+      @card.attempt = 3
+      @card.check_translation('привет')
+    end
+
+    it 'check changes review date to 14 day' do
+      expect(@card.review_date).to eq((DateTime.current+14.day).to_date)
+    end
+  end
+
+  describe 'check translation for five attempt' do
+
+    before do
+      @card.attempt = 4
+      @card.check_translation('привет')
+    end
+
+    it 'check changes review date to 30 day' do
+      expect(@card.review_date).to eq((DateTime.current+30.day).to_date)
+    end
+  end
+
+  describe 'check translation for three bad attempt ' do
+
+    before do
+      @card.accuracy = -3
+      @card.check_translation('привет')
+    end
+
+    it 'check changes review date 12 hour ' do
+      expect(@card.review_date).to eq((DateTime.current+12.hour).to_s)
+    end
+
+    it 'check accuracy value' do
+      expect(@card.accuracy).to eq 0
+    end
+
+  end
+
+
 
   describe 'scope for_review has a certain size ' do
 
     before do
       3.times do
-        user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: DateTime.now)
+        user.cards.create(original_text: 'hello', translated_text: 'Привет', review_date: DateTime.current, accuracy: 0, attempt: 0)
       end
     end
 
