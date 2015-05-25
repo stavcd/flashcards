@@ -57,7 +57,6 @@ describe Card do
     end
   end
 
-
   describe 'check translation for four attempt' do
 
     before do
@@ -98,8 +97,6 @@ describe Card do
     end
 
   end
-
-
 
   describe 'scope for_review has a certain size ' do
 
