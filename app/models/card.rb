@@ -4,9 +4,14 @@ class Card < ActiveRecord::Base
   belongs_to :user
   validates :original_text, :translated_text, :review_date, :user_id, presence: true, on: [:create, :update]
   validate :text_are_not_equal
-  scope :for_review, -> { where('review_date <= ?', DateTime.current).order('random()') }
+  before_create :set_default_review_date
+  scope :for_review, -> { where('review_date <= ?', DateTime.now).order('random()') }
 
   mount_uploader :image, ImageUploader
+
+  def set_default_review_date
+      self.review_date = DateTime.now
+  end
 
   def check_translation(input_text)
     if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
