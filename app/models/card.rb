@@ -47,19 +47,19 @@ class Card < ActiveRecord::Base
 
   def date_for_review(attempt)
     case attempt
-      when 1 then
-        update_review_date((DateTime.current+12.hour).strftime('%H'))
-      when 2 then
-        update_review_date((DateTime.current+3.day).to_date)
-      when 3 then
-        update_review_date((DateTime.current+7.day).to_date)
-      when 4 then
-        update_review_date((DateTime.current+14.day).to_date)
-      when 5 then
-        update_review_date((DateTime.current+30.day).to_date)
-      else
-        self.attempt = 0
-        self.accuracy = 0
+    when 1 then
+    update_review_date((DateTime.current+12.hour).strftime('%H'))
+    when 2 then
+    update_review_date((DateTime.current+3.day).to_date)
+    when 3 then
+    update_review_date((DateTime.current+7.day).to_date)
+    when 4 then
+    update_review_date((DateTime.current+14.day).to_date)
+    when 5 then
+    update_review_date((DateTime.current+30.day).to_date)
+    else
+      self.attempt = 0
+      self.accuracy = 0
     end
   end
 
