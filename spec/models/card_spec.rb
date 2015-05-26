@@ -105,7 +105,7 @@ describe Card do
       end
 
       it 'check changes review date to 30 day' do
-        expect(@card.review_date).to eq((DateTime.current+30.day).to_s)
+        expect(@card.review_date).to eq((DateTime.current+30.day)..strftime("%Y-%m-%d %H:%M:%S"))
       end
 
       it 'caheck attempt value' do
