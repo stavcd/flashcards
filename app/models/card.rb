@@ -10,18 +10,19 @@ class Card < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def set_default_review_date
-    self.review_date = DateTime.now
+    self.review_date = DateTime.now.to_formatted_s(:iso8601)
   end
 
   def check_translation(input_text)
     if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
       self.accuracy = 0
       self.attempt = 1
-      date_for_review(self.attempt)
+      update_attributes(review_date: (self.review_date + calculate_review_date))
       true
     elsif prepare_text(translated_text) == prepare_text(input_text) && self.accuracy > -3
       self.attempt += 1
-      date_for_review(self.attempt)
+      update_attributes(
+          review_date: (self.review_date + calculate_review_date))
       true
     else
       self.attempt += 1
@@ -49,26 +50,18 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def date_for_review(attempt)
-     case attempt
-     when 1
-       update_review_date(12.hour)
-     when 2
-       update_review_date(3.day)
-     when 3
-       update_review_date(7.day)
-     when 4
-       update_review_date(14.day)
-     when 5
-       update_review_date(30.day)
-     else
-       self.attempt = 0
-       self.accuracy = 0
-    end
+  def calculate_review_date
+      case self.attempt
+      when 1
+        12.hour
+      when 2
+        3.day
+      when 3
+        7.day
+      when 4
+        14.day
+      when 5
+        30.day
+      end
   end
-
-  def update_review_date(date)
-    self.update_attributes(review_date: (DateTime.current + date).strftime("%Y-%m-%d %H:%M:%S"))
-  end
-
 end
