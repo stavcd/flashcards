@@ -14,11 +14,13 @@ class Card < ActiveRecord::Base
   end
 
   def check_translation(input_text)
-    if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
-      update_attributes(accuracy: self.accuracy = 0, attempt: self.attempt =1,
-                        review_date: (self.review_date + calculate_review_date))
+    equal_text = prepare_text(translated_text) == prepare_text(input_text)
+    if equal_text && self.accuracy <= -3
+      self.accuracy = 0
+      self.attempt = 1
+      update_attributes(review_date: (self.review_date + calculate_review_date))
       true
-    elsif prepare_text(translated_text) == prepare_text(input_text) && self.accuracy > -3
+    elsif equal_text && self.accuracy > -3
       update_attributes(attempt: self.attempt += 1, review_date: (self.review_date + calculate_review_date))
       true
     else
@@ -50,15 +52,15 @@ class Card < ActiveRecord::Base
   def calculate_review_date
       case self.attempt
       when 1
-        12.hour
+        12.hours
       when 2
-        3.day
+        3.days
       when 3
-        7.day
+        7.days
       when 4
-        14.day
+        14.days
       when 5
-        30.day
+        30.days
       end
   end
 end

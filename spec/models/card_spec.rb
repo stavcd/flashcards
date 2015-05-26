@@ -43,7 +43,7 @@ describe Card do
         @card.check_translation('привет')
       end
       it 'check changes review date to 12 hours' do
-        expect(@card.review_date).to eq((DateTime.current+12.hour).strftime("%Y-%m-%d %H:%M:%S"))
+        expect(@card.review_date).to eq((DateTime.current+12.hours))
       end
       it 'caheck attempt value' do
         expect(@card.attempt).to eq 1
@@ -58,7 +58,7 @@ describe Card do
       end
 
       it 'check changes review date to 3 day' do
-        expect(@card.review_date).to eq((DateTime.current+3.day))
+        expect(@card.review_date).to eq((DateTime.current+3.days))
       end
       it 'caheck attempt value' do
         expect(@card.attempt).to eq 2
@@ -73,7 +73,7 @@ describe Card do
       end
 
       it 'check changes review date to 14 day' do
-        expect(@card.review_date).to eq((DateTime.current+7.day))
+        expect(@card.review_date).to eq((DateTime.current+7.days))
       end
 
       it 'caheck attempt value' do
@@ -89,7 +89,7 @@ describe Card do
       end
 
       it 'check changes review date to 14 day' do
-        expect(@card.review_date).to eq((DateTime.now + 14.day))
+        expect(@card.review_date).to eq((DateTime.now + 14.days))
       end
 
       it 'caheck attempt value' do
@@ -105,7 +105,7 @@ describe Card do
       end
 
       it 'check changes review date to 30 day' do
-        expect(@card.review_date).to eq((DateTime.current+30.day))
+        expect(@card.review_date).to eq((DateTime.current+30.days))
       end
 
       it 'caheck attempt value' do
@@ -121,7 +121,7 @@ describe Card do
       end
 
       it 'check changes review date 12 hour ' do
-        expect(@card.review_date).to eq((DateTime.current+12.hour))
+        expect(@card.review_date).to eq((DateTime.current+12.hours))
       end
 
       it 'check accuracy value' do
