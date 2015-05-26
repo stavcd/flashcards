@@ -48,7 +48,6 @@ class Card < ActiveRecord::Base
     end
   end
 
-
   def calculate_review_date
       case self.attempt
       when 1
