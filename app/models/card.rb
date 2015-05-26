@@ -15,18 +15,15 @@ class Card < ActiveRecord::Base
 
   def check_translation(input_text)
     if prepare_text(translated_text) == prepare_text(input_text) && self.accuracy <= -3
-      self.accuracy = 0
-      self.attempt = 1
+      update_attributes(accuracy: 0, attempt: 1)
       update_attributes(review_date: (self.review_date + calculate_review_date))
       true
     elsif prepare_text(translated_text) == prepare_text(input_text) && self.accuracy > -3
-      self.attempt += 1
-      update_attributes(
-          review_date: (self.review_date + calculate_review_date))
+      update_attributes(attempt: attempt + 1)
+      update_attributes(review_date: (self.review_date + calculate_review_date))
       true
     else
-      self.attempt += 1
-      self.accuracy -= 1
+      update_attributes(attempt: attempt + 1, accuracy: accuracy - 1)
       false
     end
   end
