@@ -138,7 +138,6 @@ describe Card do
         3.times do
           user.cards.create(original_text: 'hello', translated_text: 'Привет',
                             review_date: DateTime.now)
-
         end
       end
 
@@ -146,7 +145,6 @@ describe Card do
         expect(Card.for_review.size).to eq 3
       end
     end
-
   end
 end
 
