@@ -54,7 +54,5 @@ describe User do
       user1 = @user.update(email: '211222.com', password: '2111', password_confirmation: '2111')
       expect(user1).to be false
     end
-
-
   end
 end
