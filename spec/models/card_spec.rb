@@ -147,19 +147,21 @@ describe Card do
     end
   end
 
-  # context 'check levenshtein distance' do
-  #   before do
-  #     @card = user.cards.create(original_text: 'hello', translated_text: 'Привет',
-  #                               review_date: DateTime.current.to_date)
-  #   end
-  #
-  #   describe 'check error in translated text' do
-  #
-  #     it 'no errors in translated text' do
-  #       expect(@card).to eq true
-  #     end
-  #
-  #   end
-  # end
+  context 'check levenshtein distance' do
+    before do
+      @card = user.cards.create(original_text: 'hello', translated_text: 'Привет',
+                                review_date: DateTime.current.to_date)
+    end
+
+    describe 'check error in translated text' do
+      before do
+        @errors_word = @card.allowed_errors_in_word('Прювет')
+      end
+      it 'no errors in translated text' do
+        expect(@errors_word[:success]).to eq true
+      end
+
+    end
+  end
 end
 

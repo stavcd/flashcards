@@ -15,18 +15,17 @@ class Card < ActiveRecord::Base
 
   def check_translation(input_text)
     errors_word = allowed_errors_in_word(input_text)
-    equal_text = prepare_text(translated_text) == prepare_text(input_text)
-    if equal_text && self.accuracy <= -3 && errors_word == :success
+    if self.accuracy <= -3 && errors_word[:success]
       self.accuracy = 0
       self.attempt = 1
       update_attributes(review_date: (self.review_date + calculate_review_date))
-      {success: true}
-    elsif equal_text && self.accuracy > -3 && errors_word == :success
+      {success: true, typos_count: errors_word[:typos_count]}
+    elsif self.accuracy > -3 && errors_word[:success]
       update_attributes(attempt: self.attempt += 1, review_date: (self.review_date + calculate_review_date))
-      {success: true}
+      { success: true, typos_count: errors_word[:typos_count] }
     else
       update_attributes(attempt: attempt + 1, accuracy: accuracy - 1)
-      {success: false, typos_count: errors_word[:typos_count]}
+      { success: false, typos_count: errors_word[:typos_count] }
     end
   end
 
@@ -35,10 +34,9 @@ class Card < ActiveRecord::Base
     translated = prepare_text(self.translated_text)
     distance_levenshtein = Text::Levenshtein.distance(input, translated)
     if distance_levenshtein <= 3
-      :success
+      { success: true, typos_count: distance_levenshtein }
     else
-      :failed
-      {typos_count: distance_levenshtein}
+      { success: false, typos_count: distance_levenshtein }
     end
   end
 
