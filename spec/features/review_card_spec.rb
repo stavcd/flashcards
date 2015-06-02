@@ -14,8 +14,8 @@ feature 'Review Card', 'It should be the ability to check the knowledge Card' do
 
   scenario 'enter the incorrect translation' do
     sign_in(user)
-    fill_in 'input_text', with: 'Приветик'
+    fill_in 'input_text', with: 'Пюратрет'
     click_on 'Проверить'
-    expect(page).to have_content 'Неправильный перевод'
+    expect(page).to have_content 'Неправильно. В слове ..Привет. Вы допустили 4 ошибок'
   end
 end

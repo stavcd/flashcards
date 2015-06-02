@@ -14,18 +14,18 @@ class Card < ActiveRecord::Base
   end
 
   def check_translation(input_text)
-    equal_text = prepare_text(translated_text) == prepare_text(input_text)
-    if equal_text && self.accuracy <= -3
+    distance = calculate_distance(input_text, translated_text)
+    if distance <= 3 && self.accuracy <= -3
       self.accuracy = 0
       self.attempt = 1
       update_attributes(review_date: (self.review_date + calculate_review_date))
-      true
-    elsif equal_text && self.accuracy > -3
+      { success: true, typos_count: distance }
+    elsif distance <= 3 && self.accuracy > -3
       update_attributes(attempt: self.attempt += 1, review_date: (self.review_date + calculate_review_date))
-      true
+      { success: true, typos_count: distance }
     else
       update_attributes(attempt: attempt + 1, accuracy: accuracy - 1)
-      false
+      { success: false, typos_count: distance }
     end
   end
 
@@ -49,7 +49,7 @@ class Card < ActiveRecord::Base
   end
 
   def calculate_review_date
-      case self.attempt
+    case self.attempt
       when 1
         12.hours
       when 2
@@ -60,6 +60,10 @@ class Card < ActiveRecord::Base
         14.days
       when 5
         30.days
-      end
+    end
+  end
+
+  def calculate_distance(word1, word2)
+    Text::Levenshtein.distance(prepare_text(word1), prepare_text(word2))
   end
 end

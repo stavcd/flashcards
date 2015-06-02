@@ -43,7 +43,7 @@ describe Card do
         @card.check_translation('привет')
       end
       it 'check changes review date to 12 hours' do
-        expect(@card.review_date).to eq((DateTime.current+12.hours))
+        expect(@card.review_date).to eq((DateTime.current + 12.hours))
       end
       it 'caheck attempt value' do
         expect(@card.attempt).to eq 1
@@ -58,7 +58,7 @@ describe Card do
       end
 
       it 'check changes review date to 3 day' do
-        expect(@card.review_date).to eq((DateTime.current+3.days))
+        expect(@card.review_date).to eq((DateTime.current + 3.days))
       end
       it 'caheck attempt value' do
         expect(@card.attempt).to eq 2
@@ -73,7 +73,7 @@ describe Card do
       end
 
       it 'check changes review date to 14 day' do
-        expect(@card.review_date).to eq((DateTime.current+7.days))
+        expect(@card.review_date).to eq((DateTime.current + 7.days))
       end
 
       it 'caheck attempt value' do
@@ -105,7 +105,7 @@ describe Card do
       end
 
       it 'check changes review date to 30 day' do
-        expect(@card.review_date).to eq((DateTime.current+30.days))
+        expect(@card.review_date).to eq((DateTime.current + 30.days))
       end
 
       it 'caheck attempt value' do
@@ -121,7 +121,7 @@ describe Card do
       end
 
       it 'check changes review date 12 hour ' do
-        expect(@card.review_date).to eq((DateTime.current+12.hours))
+        expect(@card.review_date).to eq((DateTime.current + 12.hours))
       end
 
       it 'check accuracy value' do
@@ -143,6 +143,22 @@ describe Card do
 
       it 'check scope for_review size' do
         expect(Card.for_review.size).to eq 3
+      end
+    end
+  end
+
+  context 'check levenshtein distance' do
+    before do
+      @card = user.cards.create(original_text: 'hello', translated_text: 'Привет',
+                                review_date: DateTime.current.to_date)
+    end
+
+    describe 'check error in translated text' do
+      before do
+        @errors_word = @card.check_translation('Прювет')
+      end
+      it 'no errors in translated text' do
+        expect(@errors_word[:success]).to eq true
       end
     end
   end
