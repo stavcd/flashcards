@@ -14,8 +14,7 @@ class Card < ActiveRecord::Base
   end
 
   def check_translation(input_text)
-    distance = Text::Levenshtein.distance(prepare_text(input_text),
-                                          prepare_text(self.translated_text))
+    distance = calculate_distance(input_text,translated_text)
     if distance <= 3 && self.accuracy <= -3
       self.accuracy = 0
       self.attempt = 1
@@ -37,7 +36,6 @@ class Card < ActiveRecord::Base
   end
 
   protected
-
 
   def prepare_text(text_param)
     text_param.squish.mb_chars.downcase.to_s
@@ -63,5 +61,9 @@ class Card < ActiveRecord::Base
       when 5
         30.days
     end
+  end
+
+  def calculate_distance(word1, word2)
+    Text::Levenshtein.distance(prepare_text(word1), prepare_text(word2))
   end
 end

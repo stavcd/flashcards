@@ -16,6 +16,6 @@ feature 'Review Card', 'It should be the ability to check the knowledge Card' do
     sign_in(user)
     fill_in 'input_text', with: 'Пюратрет'
     click_on 'Проверить'
-    expect(page).to have_content 'Неправильно.В слове ..Привет. Вы допустили 4 ошибок'
+    expect(page).to have_content 'Неправильно. В слове ..Привет. Вы допустили 4 ошибок'
   end
 end
