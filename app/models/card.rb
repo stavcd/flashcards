@@ -14,7 +14,7 @@ class Card < ActiveRecord::Base
   end
 
   def check_translation(input_text)
-    distance = calculate_distance(input_text,translated_text)
+    distance = calculate_distance(input_text, translated_text)
     if distance <= 3 && self.accuracy <= -3
       self.accuracy = 0
       self.attempt = 1
