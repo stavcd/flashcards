@@ -155,12 +155,11 @@ describe Card do
 
     describe 'check error in translated text' do
       before do
-        @errors_word = @card.allowed_errors_in_word('Прювет')
+        @errors_word = @card.check_translation('Прювет')
       end
       it 'no errors in translated text' do
         expect(@errors_word[:success]).to eq true
       end
-
     end
   end
 end

@@ -14,29 +14,19 @@ class Card < ActiveRecord::Base
   end
 
   def check_translation(input_text)
-    errors_word = allowed_errors_in_word(input_text)
-    if self.accuracy <= -3 && errors_word[:success]
+    distance = Text::Levenshtein.distance(prepare_text(input_text),
+                                          prepare_text(self.translated_text))
+    if distance <= 3 && self.accuracy <= -3
       self.accuracy = 0
       self.attempt = 1
       update_attributes(review_date: (self.review_date + calculate_review_date))
-      {success: true, typos_count: errors_word[:typos_count]}
-    elsif self.accuracy > -3 && errors_word[:success]
+      { success: true, typos_count: distance }
+    elsif distance <= 3 && self.accuracy > -3
       update_attributes(attempt: self.attempt += 1, review_date: (self.review_date + calculate_review_date))
-      { success: true, typos_count: errors_word[:typos_count] }
+      { success: true, typos_count: distance }
     else
       update_attributes(attempt: attempt + 1, accuracy: accuracy - 1)
-      { success: false, typos_count: errors_word[:typos_count] }
-    end
-  end
-
-  def allowed_errors_in_word(input_text)
-    input = prepare_text(input_text)
-    translated = prepare_text(self.translated_text)
-    distance_levenshtein = Text::Levenshtein.distance(input, translated)
-    if distance_levenshtein <= 3
-      { success: true, typos_count: distance_levenshtein }
-    else
-      { success: false, typos_count: distance_levenshtein }
+      { success: false, typos_count: distance }
     end
   end
 
@@ -45,7 +35,6 @@ class Card < ActiveRecord::Base
     @image_crop_data = c
     image.recreate_versions!
   end
-
 
   protected
 
