@@ -29,11 +29,10 @@ class User < ActiveRecord::Base
   def review_notification
     User.all.each do |user|
       unless user.cards_for_review.empty?
-        CardsMailer
-            .pending_cards_notification(user, user.cards_for_review.length)
-            .deliver_later
+        CardsMailer.
+            pending_cards_notification(user, user.cards_for_review.length).
+            deliver_later
       end
     end
   end
-
 end
