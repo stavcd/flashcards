@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day do
-  runner 'User.review_notification'
+every 1.day, at: '8:00am' do
+  runner "User.review_notification"
 end

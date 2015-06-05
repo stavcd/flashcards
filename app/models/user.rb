@@ -14,6 +14,17 @@ class User < ActiveRecord::Base
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/},
             unless: :has_authentications?
 
+  def review_notification
+    User.all.each do |user|
+      review_cards = user.cards.for_review
+      unless review_cards.empty?
+        CardsMailer.
+            pending_cards_notification(user, review_cards.size).
+            deliver_now
+      end
+    end
+  end
+
   def cards_for_review
     if current_deck
       current_deck.cards.for_review
@@ -24,15 +35,5 @@ class User < ActiveRecord::Base
 
   def has_authentications?
     !email.blank? && authentications.present?
-  end
-
-  def review_notification
-    User.all.each do |user|
-      unless user.cards_for_review.empty?
-        CardsMailer.
-            pending_cards_notification(user, user.cards_for_review.length).
-            deliver_later
-      end
-    end
   end
 end
