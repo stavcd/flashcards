@@ -15,13 +15,10 @@ class User < ActiveRecord::Base
             unless: :has_authentications?
 
   def review_notification
-    User.all.each do |user|
-      review_cards = user.cards.for_review
-      unless review_cards.empty?
-        CardsMailer.
-            pending_cards_notification(user, review_cards.size).
-            deliver_now
-      end
+    User.joins(:cards).where('review_date > current_date').find_each do |user|
+      CardsMailer.
+          pending_cards_notification(user, user.cards.for_review.size).
+          deliver_now
     end
   end
 

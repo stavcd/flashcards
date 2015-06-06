@@ -58,12 +58,11 @@ describe User do
 
   describe 'review notification' do
     let(:user) { create(:user) }
-
     before do
+      Timecop.return_to_baseline
       @card = user.cards.create(original_text: 'hello', translated_text: 'Привет',
-                                review_date: DateTime.current.to_date)
+                                review_date: (DateTime.current + 1.day))
     end
-
     it 'change deliveries count' do
       expect { user.review_notification }.
           to change { ActionMailer::Base.deliveries.count }.by(1)

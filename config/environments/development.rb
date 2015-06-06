@@ -16,7 +16,7 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_settings =  {
+  config.action_mailer.smtp_settings = {
       address: "smtp.mandrillapp.com",
       port: 587,
       domain: "example.com",

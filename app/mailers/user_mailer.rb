@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default from: 'info@stavcdflashcard.com'
+  layout 'mailer'
+  default from:  ENV['USER_MAILER_DEFAULT']
 
   def welcome_email(user)
     @user = user
-    @url = 'http://stavcdflashcards.herokuapp.com/login'
-    mail(to: @user.email, subject: 'Welcome to Stavcd Flashcards')
+    mail(to: @user.email, subject: 'Welcome STAVCDFLASHCARDS')
   end
 end
