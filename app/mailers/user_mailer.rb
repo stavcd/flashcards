@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   layout 'mailer'
-  default from:  ENV['USER_MAILER_DEFAULT']
+  default from: ENV['USER_MAILER_DEFAULT']
 
   def welcome_email(user)
     @user = user

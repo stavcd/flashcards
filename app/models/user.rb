@@ -17,8 +17,7 @@ class User < ActiveRecord::Base
   def review_notification
     User.joins(:cards).where('review_date > current_date').find_each do |user|
       CardsMailer.
-          pending_cards_notification(user, user.cards.for_review.size).
-          deliver_now
+          pending_cards_notification(user).deliver_now
     end
   end
 
