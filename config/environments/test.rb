@@ -37,7 +37,7 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTION'] }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   config.after_initialize do
     t = Time.local(2015, 5, 1, 10, 5, 0)
