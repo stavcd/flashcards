@@ -39,6 +39,15 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTION'] }
 
+  config.action_mailer.smtp_settings =  {
+      address: "smtp.example.com",
+      port: 988,
+      domain: "example.com",
+      authentication: "plain",
+      user_name: "test",
+      password: "test",
+      enable_starttls_auto: true
+  }
   config.after_initialize do
     t = Time.local(2015, 5, 1, 10, 5, 0)
     Timecop.freeze(t)
