@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/},
             unless: :has_authentications?
 
-  def review_notification
+  def self.review_notification
     User.joins(:cards).where('review_date > current_date').find_each do |user|
       CardsMailer.
           pending_cards_notification(user).deliver_now
