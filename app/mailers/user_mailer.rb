@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   layout 'mailer'
-  default from: ENV['USER_MAILER_DEFAULT']
+  default from: Rails.application.secrets.user_mailer_default
 
   def welcome_email(user)
     @user = user

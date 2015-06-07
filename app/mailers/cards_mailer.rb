@@ -1,6 +1,6 @@
 class CardsMailer < ActionMailer::Base
   layout 'mailer'
-  default from: ENV['CARDS_MAILER_DEFAULT_FROM']
+  default from: Rails.application.secrets.cards_mailer_default
 
   def pending_cards_notification(user)
     @user = user
