@@ -57,7 +57,7 @@ describe User do
   end
 
   describe 'review notification' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, email: 'stavcd@mail.ru')}
     before do
       Timecop.return_to_baseline
       @card = user.cards.create(original_text: 'hello', translated_text: 'Привет',
