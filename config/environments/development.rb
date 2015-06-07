@@ -25,7 +25,7 @@ Rails.application.configure do
       password: ENV["MANDRIL_PASSWORD"],
       enable_starttls_auto: true
   }
-  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTION'] }
+  config.action_mailer.default_url_options = { host: Rails.application.secrets.default_url_from}
 
   config.action_mailer.raise_delivery_errors = false
 

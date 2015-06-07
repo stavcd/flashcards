@@ -87,5 +87,5 @@ Rails.application.configure do
       enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTION'] }
+  config.action_mailer.default_url_options = { host: Rails.application.secrets.default_url_from }
 end
