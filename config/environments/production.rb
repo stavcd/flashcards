@@ -86,4 +86,6 @@ Rails.application.configure do
       password: ENV["MANDRIL_PASSWORD"],
       enable_starttls_auto: true
   }
+
+  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTION'] }
 end
