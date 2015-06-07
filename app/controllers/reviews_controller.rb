@@ -9,7 +9,6 @@ class ReviewsController < ApplicationController
       redirect_to root_path, notice: "Правильный перевод, но Вы сделали\n
                            #{ check_result[:typos_count] } опечаток"
     else
-      current_user.review_notification
       redirect_to root_path, notice: "Неправильно. В слове ..#{ @card.translated_text }.\n
                                       Вы допустили #{ check_result[:typos_count] } ошибок"
     end
