@@ -64,7 +64,7 @@ describe User do
                                 review_date: (DateTime.current + 1.day))
     end
     it 'change deliveries count' do
-      expect { user.review_notification }.
+      expect { User.review_notification }.
           to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
