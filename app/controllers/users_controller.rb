@@ -9,8 +9,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
-      redirect_to root_path
+      UserMailer.welcome_email(@user).deliver_now
       flash[:notice] = 'User was successfully created'
+      redirect_to root_path
     else
       render 'new'
     end

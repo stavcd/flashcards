@@ -37,6 +37,17 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  config.action_mailer.default_url_options = { host: Rails.application.secrets.default_url_from }
+
+  config.action_mailer.smtp_settings =  {
+      address: "smtp.example.com",
+      port: 988,
+      domain: "example.com",
+      authentication: "plain",
+      user_name: "test",
+      password: "test",
+      enable_starttls_auto: true
+  }
   config.after_initialize do
     t = Time.local(2015, 5, 1, 10, 5, 0)
     Timecop.freeze(t)

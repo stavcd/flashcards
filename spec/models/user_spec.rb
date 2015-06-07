@@ -55,4 +55,18 @@ describe User do
       expect(user1).to be false
     end
   end
+
+  describe 'review notification' do
+    let(:user) { create(:user, email: 'stavcd@mail.ru')}
+    before do
+      Timecop.return_to_baseline
+      @card = user.cards.create(original_text: 'hello', translated_text: 'Привет',
+                                review_date: (DateTime.current + 1.day))
+    end
+    it 'change deliveries count' do
+      expect { User.review_notification }.
+          to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+  end
+
 end
